@@ -1,4 +1,3 @@
-import React from 'react';
 import { CalendarClock, MapPin, Truck, Sparkles } from 'lucide-react';
 
 const Difference = () => {

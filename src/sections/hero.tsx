@@ -1,5 +1,4 @@
-import React from 'react';
-import { Star, ShieldCheck, Zap, MapPin, Rocket, Leaf, Droplets } from 'lucide-react';
+import {  ShieldCheck, Zap,  Rocket, } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {

@@ -9,7 +9,6 @@ import Portfolio from "./sections/portfolio"
 import Pricing from "./sections/pricing"
 import ServiceArea from "./sections/service-area"
 import Testimonials from "./sections/testimonials"
-import VideoSection from "./sections/video"
 
 export function App() {
   return (

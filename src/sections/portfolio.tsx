@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronsLeftRight } from 'lucide-react';
 
 import wheelBefore from '../assets/portfolio/wheel_before.jpg';
