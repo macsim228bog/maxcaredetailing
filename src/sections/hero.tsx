@@ -31,12 +31,14 @@ const Hero = () => {
         </p>
 
         {/* Кнопка действия (сделал rounded-full как в хедере) */}
-        <Button 
-          size="lg"
-          className="bg-teal-600 hover:bg-teal-700 text-white font-bold uppercase text-sm px-10 py-7 rounded-full shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-all hover:scale-105 active:scale-95"
-        >
-          Explore Our Packages
-        </Button>
+        <a href="#pricing" className="contents"> 
+  <Button 
+    size="lg"
+    className="bg-teal-600 hover:bg-teal-700 text-white font-bold uppercase text-sm px-10 py-7 rounded-full shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-all hover:scale-105 active:scale-95"
+  >
+    Explore Our Packages
+  </Button>
+</a>
 
         {/* Статы / Преимущества (локализовано под GTA) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 w-full pt-10 border-t border-zinc-800/50">
