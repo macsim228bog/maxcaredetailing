@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { useState } from 'react';
+import { Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 
 // Импортируем данные для выпадающего списка
 import { pricingData } from '@/pricingData';
 
+// Описываем типы данных нашей формы
+type BookingFormInputs = {
+  name: string;
+  phone: string;
+  package: string;
+  message: string;
+};
+
 const BookingForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    
-    // Сохраняем ссылку на форму до начала запроса
-    const form = event.currentTarget;
-    const formData = new FormData(form);
+  // Инициализируем react-hook-form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<BookingFormInputs>();
 
-    // ВАЖНО: Вставь сюда свой ключ от Web3Forms
+  // Эта функция сработает только если форма прошла всю валидацию
+  const onSubmit: SubmitHandler<BookingFormInputs> = async (data) => {
+    // Формируем данные для Web3Forms
+    const formData = new FormData();
     formData.append('access_key', '3f98c2f9-662e-46a1-87b9-d2c9f3064b22');
+    formData.append('subject', 'New Booking Request from MaxCare Mobile');
+    
+    // Добавляем данные из хука
+    formData.append('name', data.name);
+    formData.append('phone', data.phone);
+    formData.append('package', data.package);
+    formData.append('message', data.message);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -25,8 +46,10 @@ const BookingForm = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
-        form.reset(); // Очищаем форму через сохраненную переменную
+        reset(); // Очищаем форму встроенной функцией react-hook-form
         setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error('API returned an error');
       }
     } catch (error) {
       console.error('Error submitting form', error);
@@ -65,42 +88,53 @@ const BookingForm = () => {
                 <p className="text-zinc-400">We will get back to you shortly to confirm your booking.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <input type="hidden" name="subject" value="New Booking Request from MaxCare Mobile" />
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6" noValidate>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Name Input */}
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Your Name</label>
                     <input 
-                      type="text" 
                       id="name" 
-                      name="name" 
-                      required 
                       placeholder="John Doe"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+                      className={`w-full bg-zinc-950 border rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-1 transition-all ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-zinc-800 focus:border-teal-500 focus:ring-teal-500'}`}
+                      {...register("name", { required: "Name is required" })}
                     />
+                    {errors.name && <span className="text-red-500 text-xs font-medium">{errors.name.message}</span>}
                   </div>
+
+                  {/* Phone Input */}
                   <div className="flex flex-col gap-2">
-  <label htmlFor="phone" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Phone Number</label>
-  <input 
-    type="tel" 
-    id="phone" 
-    name="phone" 
-    required 
-    placeholder="+1 (647) 000-0000"
-    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
-  />
-</div>
+                    <label htmlFor="phone" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      placeholder="+1 (647) 000-0000"
+                      className={`w-full bg-zinc-950 border rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-1 transition-all ${errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-zinc-800 focus:border-teal-500 focus:ring-teal-500'}`}
+                      {...register("phone", { 
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^[\d\s\-+()]+$/,
+                          message: "Invalid phone number format"
+                        },
+                        minLength: {
+                          value: 10,
+                          message: "Phone number is too short"
+                        }
+                      })}
+                    />
+                    {errors.phone && <span className="text-red-500 text-xs font-medium">{errors.phone.message}</span>}
+                  </div>
                 </div>
 
+                {/* Package Select */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="package" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Select Package</label>
                   <select 
                     id="package" 
-                    name="package" 
-                    required
+                    className={`w-full bg-zinc-950 border rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-1 transition-all appearance-none cursor-pointer ${errors.package ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-zinc-800 focus:border-teal-500 focus:ring-teal-500'}`}
+                    {...register("package", { required: "Please select a package" })}
                     defaultValue=""
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled>-- Choose a package --</option>
                     {Object.values(pricingData).map((category, index) => (
@@ -113,26 +147,39 @@ const BookingForm = () => {
                       </optgroup>
                     ))}
                   </select>
+                  {errors.package && <span className="text-red-500 text-xs font-medium">{errors.package.message}</span>}
                 </div>
 
+                {/* Message Textarea */}
                 <div className="flex flex-col gap-2">
                   <label htmlFor="message" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Vehicle Details & Message</label>
                   <textarea 
                     id="message" 
-                    name="message" 
                     rows={4} 
-                    required
                     placeholder="Make, model, year, and details..."
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all resize-none"
+                    className={`w-full bg-zinc-950 border rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:ring-1 transition-all resize-none ${errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-zinc-800 focus:border-teal-500 focus:ring-teal-500'}`}
+                    {...register("message", { required: "Please provide vehicle details" })}
                   ></textarea>
+                  {errors.message && <span className="text-red-500 text-xs font-medium">{errors.message.message}</span>}
                 </div>
 
+                {/* Submit Button */}
                 <button 
                   type="submit" 
-                  className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold uppercase tracking-wider py-5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 mt-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold uppercase tracking-wider py-5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 mt-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  <Send size={18} />
-                  Submit Request
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Submit Request
+                    </>
+                  )}
                 </button>
               </form>
             )}
