@@ -1,19 +1,59 @@
-import { Button } from "@/components/ui/button"
+import FadeIn from "./components/fade-in"
+import Footer from "./components/footer"
+import Header from "./components/header"
+import BookingForm from "./sections/booking-form"
+import Difference from "./sections/difference"
+import Hero from "./sections/hero"
+import HowItWorks from "./sections/how-it-works"
+import Portfolio from "./sections/portfolio"
+import Pricing from "./sections/pricing"
+import ServiceArea from "./sections/service-area"
+import Testimonials from "./sections/testimonials"
+import VideoSection from "./sections/video"
 
 export function App() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
+    // min-h-screen - минимальная высота во весь экран
+    // flex-col - элементы идут сверху вниз
+    // bg-zinc-950 - задаем базовый темный фон для всего сайта
+    // antialiased - делает шрифты более гладкими
+    <div className="min-h-screen flex flex-col bg-zinc-950 font-sans text-zinc-50 antialiased selection:bg-teal-500/30">
+      <Header />
+      
+      {/* Оборачиваем остальной контент в main для семантики */}
+      <main className="flex-1 flex flex-col w-full">
+        <Hero />
+        <FadeIn>
+          <HowItWorks/>
+        </FadeIn>
+        <FadeIn>
+        <Difference/>
+
+        </FadeIn>
+        <FadeIn>
+        <Testimonials/>
+
+        </FadeIn>
+        <FadeIn>
+        <Pricing/>
+
+        </FadeIn>
+        {/* <FadeIn>
+        <VideoSection/>
+
+        </FadeIn> */}
+        <FadeIn>
+        <Portfolio/>
+
+        </FadeIn>
+        <FadeIn>
+        <ServiceArea/>
+        </FadeIn>
+        <FadeIn>
+        <BookingForm/>
+        </FadeIn>
+      </main>
+      <Footer/>
     </div>
   )
 }
