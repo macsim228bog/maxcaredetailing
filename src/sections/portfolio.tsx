@@ -16,7 +16,7 @@ const BeforeAfterSlider = ({ beforeImg, afterImg, aspectRatio = "aspect-[4/3] md
   const [sliderPosition, setSliderPosition] = useState(50);
 
   return (
-    <div className={`relative w-full ${aspectRatio} rounded-2xl overflow-hidden group bg-zinc-900 border border-zinc-800 shadow-2xl select-none`}>
+    <div className={`relative w-full ${aspectRatio} rounded-2xl overflow-hidden group bg-zinc-900 border border-zinc-800 shadow-2xl select-none`} id="portfolio">
       
       {/* Изображение "ПОСЛЕ" */}
       <img 
