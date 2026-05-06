@@ -1,4 +1,3 @@
-import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 // Импортируем логотип (убедись, что путь правильный, как в Header)
 import logo from './logo.jpg'; 

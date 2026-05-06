@@ -1,5 +1,5 @@
 // src/sections/Pricing.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Check, Sparkles, Plus } from 'lucide-react';
 
 // Импортируем наши данные из отдельного файла

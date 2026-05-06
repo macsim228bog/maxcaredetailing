@@ -81,16 +81,16 @@ const BookingForm = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Email Address</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      name="email" 
-                      required 
-                      placeholder="john@example.com"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
-                    />
-                  </div>
+  <label htmlFor="phone" className="text-zinc-400 text-sm font-bold uppercase tracking-widest">Phone Number</label>
+  <input 
+    type="tel" 
+    id="phone" 
+    name="phone" 
+    required 
+    placeholder="+1 (647) 000-0000"
+    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+  />
+</div>
                 </div>
 
                 <div className="flex flex-col gap-2">

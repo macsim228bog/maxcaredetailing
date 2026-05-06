@@ -1,4 +1,3 @@
-import React from 'react';
 import { MousePointerClick, Car, Key } from 'lucide-react';
 
 const HowItWorks = () => {
