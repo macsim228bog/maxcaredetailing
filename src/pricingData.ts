@@ -52,7 +52,7 @@ export const pricingData = {
     packages: [
       {
         name: 'Signature Interior',
-        price: '210',
+        price: '170',
         popular: false,
         features: ['Full Vacuum (Cracks & Crevices)', 'Interior Window Cleaning', 'All Hard Surfaces Scrubbed', 'Seat Cleaning Wipe Down', 'Trunk & Cargo Area Cleaning']
       },
@@ -77,19 +77,19 @@ export const pricingData = {
     packages: [
       {
         name: 'Signature Exterior',
-        price: '60',
+        price: '100',
         popular: false,
         features: ['Wheel & Tire Cleaning', 'Snow Foam Hand Wash', 'Bug Removal', 'Exterior Windows', 'Glossy Finish']
       },
       {
         name: 'Premium Exterior',
-        price: '80',
+        price: '130',
         popular: true,
         features: ['Everything in Signature', 'Wheel Well Cleaning', 'Clay Mitt Decontamination', '3-6 Month Spray Sealant']
       },
       {
         name: 'Elite Exterior',
-        price: '150',
+        price: '200',
         popular: false,
         features: ['Everything in Premium', 'Ceramic Tire Shine', 'Deep Wheel Well & Door Jam Clean', 'Iron Removal (Decontamination)', 'Machine Wax Protection', 'Exhaust Tip Cleaning']
       }
