@@ -11,6 +11,10 @@ import backseatBefore from '../assets/portfolio/backseat_before.jpg';
 import backseatAfter from '../assets/portfolio/backseat_after.jpg';
 import driverBefore from '../assets/portfolio/driver_before.jpg';
 import driverAfter from '../assets/portfolio/driver_after.jpg';
+import driverAfterCivic from '../assets/portfolio/driver_after_civic.jpg';
+import driverBeforeCivic from '../assets/portfolio/driver_before_civic.jpg';
+import doorBeforeCivic from '../assets/portfolio/door-before-civic.jpg';
+import doorAfterCivic from '../assets/portfolio/door-after-civic.jpg';
 // Внутренний компонент для ползунка До/После (добавил проп aspectRatio для управления пропорциями)
 const BeforeAfterSlider = ({ beforeImg, afterImg, aspectRatio = "aspect-[4/3] md:aspect-video" }: { beforeImg: string, afterImg: string, aspectRatio?: string }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -114,14 +118,35 @@ const portfolioItems = [
       ]
     },
     {
-      id: 3,
+       id: 3,
+      title: 'Driver’s Zone',
+      car: 'Honda Civic',
+      // ИСПРАВЛЕНО: Описание теперь про руль и консоль
+      description: 'Deep cleaning of the driver side, including doors, driver seat and control panel.',
+      sliders: [
+        {
+          id: '3a',
+          label: 'Driver Seat', // На фото 12/13 руль и торпеда
+          beforeImg: driverAfterCivic, // Подставь сюда фото 12 (до)
+          afterImg: driverBeforeCivic,   // Подставь сюда фото 13 (после)
+        },
+        {
+          id: '3b',
+          label: 'Door', // На фото 12/13 руль и торпеда
+          beforeImg: doorBeforeCivic, // Подставь сюда фото 12 (до)
+          afterImg: doorAfterCivic,   // Подставь сюда фото 13 (после)
+        }
+      ]
+    },
+    {
+      id: 4,
       title: 'Cockpit Detail',
       car: 'BMW 335i',
       // ИСПРАВЛЕНО: Описание теперь про руль и консоль
       description: 'Deep cleaning of the driver side, including steering wheel and center console. Removing all dust and grime from the controls.',
       sliders: [
         {
-          id: '3a',
+          id: '4a',
           label: 'Dashboard', // На фото 12/13 руль и торпеда
           beforeImg: driverBefore, // Подставь сюда фото 12 (до)
           afterImg: driverAfter,   // Подставь сюда фото 13 (после)

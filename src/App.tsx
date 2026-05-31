@@ -3,6 +3,7 @@ import Footer from "./components/footer"
 import Header from "./components/header"
 import BookingForm from "./sections/booking-form"
 import Difference from "./sections/difference"
+import Gallery from "./sections/gallery"
 import Hero from "./sections/hero"
 import HowItWorks from "./sections/how-it-works"
 import Portfolio from "./sections/portfolio"
@@ -43,6 +44,10 @@ export function App() {
         </FadeIn> */}
         <FadeIn>
         <Portfolio/>
+
+        </FadeIn>
+        <FadeIn>
+        <Gallery/>
 
         </FadeIn>
         <FadeIn>
