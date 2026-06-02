@@ -15,7 +15,7 @@ export const pricingData = {
     packages: [
       {
         name: 'Signature Package',
-        price: '199',
+        price: '250',
         popular: false,
         features: [
           'Wheel & Tire Cleaning / Shine', 'Pre-Wash & Bug Removal', 'Snow Foam Hand Wash', 
